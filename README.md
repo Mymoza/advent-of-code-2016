@@ -1,5 +1,5 @@
 # advent-of-code-2016
-Repository for my participation to [Advent of Code](http://http://adventofcode.com/) 2016!
+Repository for my participation to [Advent of Code](http://adventofcode.com/) 2016!
 
 
 ## Python 3.0
