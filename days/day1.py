@@ -11,31 +11,45 @@ class walker:
 
     direction = 90;
 
+    pos_list = []
+
     x = 0;
     y = 0;
+
+    part2_foundit = False
+    part2 = 0
 
     # Change the currect direction of the walker
     def turn(self, heading):
         if heading == "L":
-            self.direction += 90;
+            self.direction += 90
         elif heading == "R":
-            self.direction -= 90;
+            self.direction -= 90
         self.direction = self.direction % 360
         return self.direction
 
     def walk(self, distance):
-        if self.direction == 0:
-            self.x += distance
-            print("Heading East", self.x)
-        elif self.direction == 90:
-            self.y += distance
-            print("Heading North", self.y)
-        elif self.direction == 180:
-            self.x -= distance
-            print("Heading West", self.x)
-        elif self.direction == 270:
-            self.y -= distance
-            print("Heading South", self.y)
+        for i in range(distance):
+            if self.direction == 0:
+                self.x += 1
+            elif self.direction == 90:
+                self.y += 1
+            elif self.direction == 180:
+                self.x -= 1
+            elif self.direction == 270:
+                self.y -= 1
+
+            if {self.x, self.y} not in self.pos_list:  #If the coords are not already in the list
+                self.pos_list.append({self.x, self.y})
+
+            elif self.part2_foundit is False:
+                # If I had more time this should be made cleaner lol ...
+                part2 = self.shortest_path()
+                self.part2_foundit = True
+                print "part2 answer is ",part2
+                break;
+
+
 
     def shortest_path(self):
         return abs(0-self.x) + abs(0-self.y);
@@ -46,8 +60,8 @@ class walker:
         for i in data.split(", "):
             dist = int(i[1:])
             dir = i[0]
-            human.turn(dir);
-            human.walk(dist);
+            human.turn(dir)
+            human.walk(dist)
 
         return human.shortest_path()
 
@@ -56,7 +70,8 @@ class walker:
 human = walker()
 where_is_bunny = human.readfile(file_day1)
 
-print "Im at", human.x, human.y, "the shortest path is", where_is_bunny
+
+
 
 
 
