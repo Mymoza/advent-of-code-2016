@@ -16,8 +16,8 @@ class bathroomDoor:
     numbers = []
 
     def find_number(self, line):
-        action = 0
-        for letter in str(line): # Explore Letter by Letter until the end
+        for letter in line: # Explore Letter by Letter until the end
+
             if letter == "U":
                 self.y = max(0, self.y - 1)
             elif letter == "D":
@@ -26,24 +26,19 @@ class bathroomDoor:
                 self.x = max(0, self.x - 1)
             elif letter == "R":
                 self.x = min(2, self.x + 1)
-        print self.y, self.x
-        return self.y, self.x
 
 
     def readfile(self, file):
-        c = file.readlines() #Read lines
-        result = ""
-        for line in c: # Explore line by line
-            result += str(self.find_number(c))
-            self.numbers.append(str(self.keys[self.y][self.x]))
-        return self.numbers
+        for line in file: # Explore line by line
+            self.find_number(line)
+            (self.numbers).append(str(self.keys[self.y][self.x]))
 
 
 
 pee = bathroomDoor()
 
-result = pee.readfile(file_day2)
-print result
+pee.readfile(file_day2)
+print(''.join(pee.numbers))
 
 
 
